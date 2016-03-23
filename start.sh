@@ -6,7 +6,7 @@ PGDB="${PGDB:-reviewboard}"
 
 # Get these variables either from PGPORT and PGHOST, or from
 # linked "pg" container.
-PGPORT="${PGPORT:-$( echo "${PG_PORT_5432_TCP_PORT:-5432}" )}"
+PGPORT="${PGPORT:-$( echo "${PG_PORT_5432_TCP_PORT:-3306}" )}"
 PGHOST="${PGHOST:-$( echo "${PG_PORT_5432_TCP_ADDR:-127.0.0.1}" )}"
 
 # Get these variable either from MEMCACHED env var, or from
@@ -25,7 +25,7 @@ if [[ ! -d /var/www/reviewboard ]]; then
     rb-site install --noinput \
         --domain-name="$DOMAIN" \
         --site-root=/ --static-url=static/ --media-url=media/ \
-        --db-type=postgresql \
+        --db-type=mysql \
         --db-name="$PGDB" \
         --db-host="$PGHOST" \
         --db-user="$PGUSER" \
